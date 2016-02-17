@@ -1,11 +1,7 @@
 {
   "name": "script_loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple tool for Async Script Loading",
-  "main": "scriptLoader.js",
-  "scripts": {
-    "test": ""
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/the-teacher/ScriptLoader.git"
@@ -16,9 +12,16 @@
     "Loading"
   ],
   "author": "Ilya N. Zykin",
-  "license": "MIT",
+  "homepage": "https://github.com/the-teacher/ScriptLoader#readme",
+
   "bugs": {
     "url": "https://github.com/the-teacher/ScriptLoader/issues"
   },
-  "homepage": "https://github.com/the-teacher/ScriptLoader#readme"
+
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ]
 }
