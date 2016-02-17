@@ -15,7 +15,7 @@
           var callbacks = {};
 
           var add_callback = function(url, callback){
-            callbacks[url] ? callbacks[url] : callbacks[url] = [];
+            callbacks[url] ? null : callbacks[url] = [];
             callbacks[url].push( callback );
           }
 
@@ -25,7 +25,7 @@
 
             // Execute Callbacks for URL
             for (k in set) {
-              var fn = set[k];
+              fn = set[k];
               fn();
             }
 
@@ -83,11 +83,7 @@
             document.getElementsByTagName("head")[0].appendChild( script );
           }
 
-          var _public = {
-            load: load
-          }
-
-          return _public;
+          return { load: load };
         }
       })(this)();
 
