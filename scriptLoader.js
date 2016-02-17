@@ -7,13 +7,15 @@ var ScriptLoader = (function(_this) {
     var callbacks = {};
 
     var add_callback = function(url, callback) {
+      if( !callback ){ return false }
+
       callbacks[url] ? null : callbacks[url] = [];
       callbacks[url].push( callback );
     }
 
     var exec_callbacks = function(url) {
       var fn, k;
-      var set = callbacks[url]
+      var set = callbacks[url];
 
       // Execute Callbacks for URL
       for (k in set) {
@@ -53,7 +55,7 @@ var ScriptLoader = (function(_this) {
       var script = document.createElement("script");
 
       script.type    = "text/javascript";
-      script.charset = "utf-8"
+      script.charset = "utf-8";
       script.defer   = true;
 
       if (script.readyState) {
