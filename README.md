@@ -2,6 +2,11 @@
 
 If you are looking for simple tool for Async Script Loading, this can be useful for you
 
+**features**
+
+- avoid duplication URL loading
+- callbacks queue
+
 ```javascript
   <script>
     lodash_url = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.4.0/lodash.js" + '?' + Math.random();
