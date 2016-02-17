@@ -39,4 +39,10 @@ If you are looking for simple tool for Async Script Loading, this can be useful 
   </script>
 ```
 
+### Install
+
+```
+npm install script_loader --save
+```
+
 ### MIT License, 2016
