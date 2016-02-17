@@ -34,4 +34,4 @@ If you are looking for simple tool for Async Script Loading, this can be useful 
   </script>
 ```
 
-### MIT License 2016
+### MIT License, 2016

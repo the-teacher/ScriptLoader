@@ -59,7 +59,8 @@
             add_loading(url, callback);
 
             var script = document.createElement( "script" )
-            script.type = "text/javascript";
+            script.type  = "text/javascript";
+            script.defer = true;
 
             if(script.readyState) {
               //IE
