@@ -2,6 +2,8 @@
 
 var ScriptLoader = (function(_this) {
   return function() {
+    var version = '1.2.0';
+
     var loaded    = [];
     var loading   = {};
     var callbacks = {};
@@ -80,7 +82,11 @@ var ScriptLoader = (function(_this) {
       document.getElementsByTagName("head")[0].appendChild(script);
     }
 
-    return { load: load, loaded: loaded };
+    return {
+      load:    load,
+      loaded:  loaded,
+      version: version
+    };
   }
 })(this)();
 
