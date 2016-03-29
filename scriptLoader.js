@@ -1,6 +1,6 @@
-'use strict';
-
 var ScriptLoader = (function(_this) {
+  'use strict';
+
   return function() {
     var version = '1.2.0';
 
