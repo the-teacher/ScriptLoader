@@ -9,8 +9,8 @@ var ScriptLoader = (function(_this) {
     var callbacks = {};
 
     function isFunction(object) {
-     var getType = {}
-     return object && getType.toString.call(object) === '[object Function]'
+      var getType = {}
+      return object && getType.toString.call(object) === '[object Function]'
     }
 
     var add_callback = function(url, callback) {
@@ -66,7 +66,7 @@ var ScriptLoader = (function(_this) {
     var load = function( url, arg_1, arg_2 ) {
       var callback, options;
 
-      // if first arg presense
+      // if first arg presence
       // get callback function and options
       if( arg_1 ){
         if( isFunction(arg_1) ) {
@@ -77,25 +77,29 @@ var ScriptLoader = (function(_this) {
         }
       }
 
-      // if URL not loaded yet -> add callback to queue
+      // if URL found in `loaded` -> add callback & exec
+      // and RETURN
       if ( loaded.indexOf(url) !== -1 ) {
         add_callback(url, callback);
         exec_callbacks(url);
         return false;
       }
 
+      // if URL found in `loading` - add callback
+      // and RETURN
       if ( loading[url] ) {
         add_callback(url, callback);
         return false;
       }
 
+      // Add to `loading`
       add_loading(url, callback);
 
       // Create script tag and add basic properties
       var script = document.createElement("script");
 
-      script.type    = "text/javascript";
-      script.charset = "utf-8";
+      script.type    = 'text/javascript';
+      script.charset = 'utf-8';
       script.defer   = true;
       script.async   = true;
 
@@ -110,7 +114,7 @@ var ScriptLoader = (function(_this) {
       if (script.readyState) {
         //IE
         script.onreadystatechange = function() {
-          if (script.readyState === "loaded" || script.readyState === "complete") {
+          if (script.readyState === 'loaded' || script.readyState === 'complete') {
             script.onreadystatechange = null;
 
             add_loaded(url);
@@ -126,7 +130,7 @@ var ScriptLoader = (function(_this) {
       }
 
       script.src = url;
-      document.getElementsByTagName("head")[0].appendChild(script);
+      document.getElementsByTagName('head')[0].appendChild(script);
     }
 
     return {
