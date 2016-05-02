@@ -2,7 +2,7 @@ var ScriptLoader = (function(_this) {
   'use strict';
 
   return function() {
-    var version = '1.2.0';
+    var version = '1.3.0';
 
     var loaded    = [];
     var loading   = {};
@@ -36,6 +36,24 @@ var ScriptLoader = (function(_this) {
     var add_loaded = function(url) {
       loaded.push(url);
       delete loading[url];
+    }
+
+    var _delete = function(url) {
+      // cleanup arrays
+      delete loaded[ loaded.indexOf(url) ];
+      delete loading[url];
+
+      // cleanup DOM
+      var scripts = document.querySelectorAll('[src="' + url + '"]');
+      for(var i; i++; scripts.length){
+        var script = scripts[i];
+        script.parentNode.removeChild(script);
+      }
+    }
+
+    var force_load = function( url, callback ) {
+      _delete(url);
+      load( url, callback );
     }
 
     var load = function( url, callback ) {
@@ -83,9 +101,12 @@ var ScriptLoader = (function(_this) {
     }
 
     return {
-      load:    load,
+      load: load,
+      delete: _delete,
+      force_load: force_load,
+
       loaded:  loaded,
-      version: version
+      version: version,
     };
   }
 })(this)();
