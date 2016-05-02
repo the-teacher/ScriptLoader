@@ -2,11 +2,16 @@ var ScriptLoader = (function(_this) {
   'use strict';
 
   return function() {
-    var version = '1.3.0';
+    var version = '1.4.0';
 
     var loaded    = [];
     var loading   = {};
     var callbacks = {};
+
+    function isFunction(object) {
+     var getType = {}
+     return object && getType.toString.call(object) === '[object Function]'
+    }
 
     var add_callback = function(url, callback) {
       if( !callback ){ return false }
@@ -51,14 +56,28 @@ var ScriptLoader = (function(_this) {
       }
     }
 
-    var force_load = function( url, callback ) {
+    var force_load = function( url, arg_1, arg_2 ) {
       _delete(url);
-      load( url, callback );
+      load( url, arg_1, arg_2 );
     }
 
-    var load = function( url, callback ) {
-      var $this = this;
+    // 1. load url, function(){ }
+    // 2. load url, { ... }, function(){ }
+    var load = function( url, arg_1, arg_2 ) {
+      var callback, options;
 
+      // if first arg presense
+      // get callback function and options
+      if( arg_1 ){
+        if( isFunction(arg_1) ) {
+          callback = arg_1;
+        } else {
+          options  = arg_1;
+          callback = arg_2;
+        }
+      }
+
+      // if URL not loaded yet -> add callback to queue
       if ( loaded.indexOf(url) !== -1 ) {
         add_callback(url, callback);
         exec_callbacks(url);
@@ -72,11 +91,21 @@ var ScriptLoader = (function(_this) {
 
       add_loading(url, callback);
 
+      // Create script tag and add basic properties
       var script = document.createElement("script");
 
       script.type    = "text/javascript";
       script.charset = "utf-8";
       script.defer   = true;
+      script.async   = true;
+
+      // set options to script tag
+      if( options ){
+        for(var key in options) {
+          var attr = options[key];
+          script.setAttribute(key, attr)
+        }
+      }
 
       if (script.readyState) {
         //IE
